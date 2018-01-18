@@ -10,8 +10,8 @@ You must have a valid authentication for AWS CLI already set up for the STS call
 Examples:
 
 ```
-> aws-mfa-auth --help
-usage: aws-mfa-auth [-h] [--token TOKEN] [--profile PROFILE | --serial SERIAL]
+> aws-mfa-login --help
+usage: aws-mfa-login [-h] [--token TOKEN] [--profile PROFILE | --serial SERIAL]
                     [--fish | --bash]
 
 optional arguments:
@@ -23,7 +23,7 @@ optional arguments:
   --fish             Override shell guessing, set to fish (use "set -e")
   --bash             Override shell guessing, set to bash (use "unset")
 
-> aws-mfa-auth 
+> aws-mfa-login
 MFA token: 123456
 export AWS_ACCESS_KEY_ID=ASIAJ5YFB3RUUOXGYOZQ
 export AWS_SECRET_ACCESS_KEY=abWbgMq5432lLIn6x34tj+Wlpykq1WR/KvbG2SXg

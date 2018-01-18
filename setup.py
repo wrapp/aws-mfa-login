@@ -20,8 +20,8 @@ Programming Language :: Python :: 3.3""".split('\n'),
     long_description = open('README.md', 'rt').read(),
     entry_points = {
         'console_scripts': [
-            'aws-mfa-auth = wrapp.aws.mfa:main',
-            'ama = wrapp.aws.mfa:main',
+            'aws-mfa-login = wrapp.aws.mfa:main',
+            'aml = wrapp.aws.mfa:main',
             ]
         },
 )
