@@ -1,5 +1,5 @@
 # aws-mfa-auth
-Command-line tool for MFA authentication against the AWS CLI
+Command-line tool for MFA authentication against the AWS CLI. Only generates environment variables, no state or configuration (MFA serial can optionally be added to AWS config).
 
 Will by default ask for MFA token, and grab MFA device serial from the default profile in `~/.aws/config`.
 
