@@ -46,12 +46,12 @@ def get_credentials(args: argparse.Namespace) -> dict:
         try:
             profile = config["profile " + args.profile]
         except KeyError:
-            print("# Profile '%s' not found!" % args.profile)
+            print("# Profile '%s' not found!" % args.profile, file=sys.stderr)
             sys.exit(-1)
         try:
             mfa_serial = profile["mfa_serial"]
         except KeyError:
-            print("# Profile '%s' does not have mfa_serial set!" % args.profile)
+            print("# Profile '%s' does not have mfa_serial set!" % args.profile, file=sys.stderr)
             sys.exit(-1)
     else:
         mfa_serial = str(args.serial)
@@ -61,7 +61,7 @@ def get_credentials(args: argparse.Namespace) -> dict:
     # AWS Session token already set but expired will make it break
     clean_env = os.environ.copy()
     if 'AWS_SESSION_TOKEN' in clean_env:
-        print("Deleting session token")
+        print("# Deleting session token", file=sys.stderr)
         del clean_env['AWS_SESSION_TOKEN']
 
     # Get the session token
@@ -72,7 +72,7 @@ def get_credentials(args: argparse.Namespace) -> dict:
     ], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=clean_env)
     data, _ = proc.communicate()
     if proc.returncode != 0:
-        print("# get-session-token failed: ", data.decode('utf-8'))
+        print("# get-session-token failed: ", data.decode('utf-8'), file=sys.stderr)
         sys.exit(-1)
 
     credentials = json.loads(data.decode('utf-8'))["Credentials"]
@@ -82,14 +82,14 @@ def get_credentials(args: argparse.Namespace) -> dict:
 def print_credentials(credentials: dict, fish=False):
     """Print export commands for the credentials dict given.
     If AWS_PROFILE is set, also print unset command for it."""
-    export = 'export %s=%s' if not fish else 'set -x %s %s'
+    export = 'export %s=%s;' if not fish else 'set -x %s %s;'
     print(export % ("AWS_ACCESS_KEY_ID", credentials["AccessKeyId"]))
     print(export % ("AWS_SECRET_ACCESS_KEY", credentials["SecretAccessKey"]))
     print(export % ("AWS_SESSION_TOKEN", credentials["SessionToken"]))
 
     # Profile messes with the setup
     if 'AWS_PROFILE' in os.environ:
-        print('unset AWS_PROFILE' if not fish else 'set -e AWS_PROFILE')
+        print('unset AWS_PROFILE;' if not fish else 'set -e AWS_PROFILE;')
 
 
 def main():
