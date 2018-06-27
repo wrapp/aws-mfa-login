@@ -29,3 +29,6 @@ export AWS_ACCESS_KEY_ID=ASIAJ5YFB3RUUOXGYOZQ
 export AWS_SECRET_ACCESS_KEY=abWbgMq5432lLIn6x34tj+Wlpykq1WR/KvbG2SXg
 export AWS_SESSION_TOKEN=FQodyXlDvLv//////////wEaDCDCm3ZyUN0wDhSDKd3klfssZo4zNgTqnmUiVH0Hp8EUwtdKwvbiAa7JsyXVfzP2vaM0MTZmur/SDFDSf33/77WSdNtpUnaMyEnNP//XA7OVzmzlMLAXKYAbzrq3tBVuXxspEccz+qrxMZkfXD+DfLfkgbKF384kSDksKDF+85kZZTTr6t4t7v1tZ9DNV3xEehNJk8BS5yrD6vKusGRir+ZVm3SDFddfdsDFFD
 ```
+# Install
+    pip install --user git+https://github.com/wrapp/aws-mfa-login.git
+
