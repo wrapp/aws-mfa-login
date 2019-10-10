@@ -18,7 +18,7 @@ def parse_args() -> argparse.Namespace:
     serial_group = parser.add_mutually_exclusive_group()
     serial_group.add_argument('--profile', type=str, default='default',
                               help='AWS Profile to read MFA Serial from')
-    serial_group.add_argument('--serial', type=int, default=None,
+    serial_group.add_argument('--serial', type=str, default=None,
                               help='MFA device serial (e.g. arn:aws:iam::00000000000:mfa/myiamuser)')
 
     shell_group = parser.add_mutually_exclusive_group()
@@ -44,7 +44,7 @@ def get_credentials(args: argparse.Namespace) -> dict:
         config = configparser.ConfigParser()
         config.read(expanduser("~/.aws/config"))
         try:
-            profile = config["profile " + args.profile]
+            profile = config[args.profile]
         except KeyError:
             print("# Profile '%s' not found!" % args.profile, file=sys.stderr)
             sys.exit(-1)
